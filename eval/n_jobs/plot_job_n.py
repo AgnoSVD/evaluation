@@ -52,8 +52,8 @@ for alg in ["als", "sgd"]:
             if metric == "cost*perf":
                 imp_cost_perf -= sum(svd_scores)
         plt.grid(True)
-        plt.xticks(np.linspace(0, 6, 13))
-        plt.yticks(np.linspace(0, 1, 11))
+        plt.xticks(np.linspace(0, 6, 7))
+        plt.yticks(np.linspace(0, 1, 6))
 
 plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
            ncol=1, mode="expand", borderaxespad=0.1)

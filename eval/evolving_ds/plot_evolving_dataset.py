@@ -49,11 +49,11 @@ def plotter(size):
                 plt.grid(True)
                 # plt.xlabel(f"{alg}")
                 plt.xticks(np.linspace(0, 1, 11), fontsize=12)
-                plt.yticks(np.linspace(0, 1, 11), fontsize=12)
+                plt.yticks(np.linspace(0, 1, 6), fontsize=12)
 
         plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
                    ncol=1, mode="expand", borderaxespad=0.1)
-        plt.ylim(0 ,1)
+        plt.ylim(0 ,1.01)
         plt.ylabel("Probality of accurate prediction", fontsize=10)
         plt.xlabel("Threshold", fontsize=10)
         plt.tight_layout(h_pad=1)

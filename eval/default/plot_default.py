@@ -25,7 +25,7 @@ for alg in ["als", "sgd"]:
             plt.grid(True)
             # plt.xlabel(f"{alg}")
             plt.xticks(np.linspace(0, 1, 11))
-            plt.yticks(np.linspace(0, 1, 11))
+            plt.yticks(np.linspace(0, 1, 6))
 
     plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
                ncol=1, mode="expand", borderaxespad=0.1)

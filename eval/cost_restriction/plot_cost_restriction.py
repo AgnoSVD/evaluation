@@ -22,8 +22,8 @@ for alg in ["als", "sgd"]:
             plt.plot(thres_list, als_prob, "--", label=f'_nolegend_', color=colors[index])
         plt.grid(True)
         # plt.xlabel(f"{alg}")
-        plt.xticks(thres_list)
-        plt.yticks(thres_list)
+        plt.xticks(np.linspace(0, 1, 11))
+        plt.yticks(np.linspace(0, 1, 6))
 
 plt.legend(bbox_to_anchor=(.62, .01, .38, .1), loc='lower left',
             ncol=1, mode="expand", borderaxespad=0.1)
