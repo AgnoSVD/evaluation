@@ -26,6 +26,7 @@ def plotter(n_jobs):
     # density_list = np.linspace(0.2, 1, 9)
     # density_list = np.linspace(0.2, 1, 5)
     density_list = np.linspace(0.2, 1, 81)
+    imp_perf = 0
     imp_cost = 0
     imp_perf_cost = 0
     for alg in ["als", "sgd"]:
@@ -52,12 +53,16 @@ def plotter(n_jobs):
             x, y = smooth(x, y, 51)
             if alg == "als":
                 plt.plot(x, y, "-", label=f'{metric}', color=colors[index])
+                if metric == "perf":
+                    imp_perf += sum(scores)
                 if metric == "cost":
                     imp_cost += sum(scores)
                 if metric == "cost*perf":
                     imp_perf_cost += sum(scores)
             else:
                 plt.plot(x, y, "--", label=f'_nolegend_', color=colors[index])
+                if metric == "perf":
+                    imp_perf -= sum(scores)
                 if metric == "cost":
                     imp_cost -= sum(scores)
                 if metric == "cost*perf":
@@ -74,6 +79,7 @@ def plotter(n_jobs):
     plt.savefig(f"./fig_row_den_{n_jobs}.png")
     plt.clf()
 
+    print("Avg improvement perf:", imp_perf / len(density_list))
     print("Avg improvement cost:", imp_cost / len(density_list))
     print("Avg improvement cost*perf:", imp_perf_cost / len(density_list))
 
