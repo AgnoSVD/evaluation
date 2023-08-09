@@ -467,40 +467,4 @@ if __name__ == '__main__':
             break
 
     print(">>>", metric, alg, "best_params:", params_grid)
-    # train_size = 90
-    #
-    # metrics = ["cost", "cost*perf", "perf"]
-    # for metric in metrics:
-    #     for alg in ["als", "sgd"]:
-    #         best_score = 0
-    #         best_params = {}
-    #         for K in [10, 15, 30, 50]:
-    #             for lambda_u in [5, 0.5, 0.05, 0.005]:
-    #                 for lambda_v in [5, 0.5, 0.05, 0.005, 0.0005]:
-    #                     lr_list = [1, 0.1, 0.01, 0.001] if alg == "sgd" else [1]
-    #                     for lr in lr_list:
-    #                         for training_epochs in [5, 10, 30, 50, 100]:
-    #                             print({"K": K, "lambda_u": lambda_u,
-    #                                    "lambda_v": lambda_v,
-    #                                    "lr": lr, "training_epochs": training_epochs})
-    #                             benchmark = Benchmark(metric=metric, train_size=train_size, K=K, lamda_u=lambda_u,
-    #                                                   lamda_v=lambda_v, lr=lr, training_epochs=training_epochs)
-    #                             benchmark.run_evaluation("", "eval", 5, alg)
-    #                             svd_score = benchmark.eval_result("eval", alg)
-    #                             if svd_score - best_score > 0.01:
-    #                                 best_score = svd_score
-    #                                 best_params = {"K": K, "lambda_u": lambda_u,
-    #                                                "lambda_v": lambda_v,
-    #                                                "lr": lr, "training_epochs": training_epochs}
-    #
-    #         print('=' * 50)
-    #         print(">>>", metric, alg, best_score, best_params)
-    #         print('=' * 50)
-
-    # benchmark = Benchmark(metric=metric, train_size=train_size, K=15,
-    #                       lamda_u=0.05, lamda_v=0.05, lr=1,
-    #                       training_epochs=30)
-    # benchmark.run_evaluation("", "eval", 1, "als")
-    # svd_score = benchmark.eval_result("eval", "als")
-    # print(svd_score)
 
