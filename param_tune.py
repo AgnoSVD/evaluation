@@ -437,36 +437,36 @@ class Benchmark:
 if __name__ == '__main__':
     alg = 'als'
     metric = 'cost*perf'
-    params_list = []
+    params_grid = []
     for K in [10, 15, 30]:
         for lambda_u in [5, 0.1, 0.5, 0.01, 0.05, 0.001, 0.005]:
             for lambda_v in [5, 0.1, 0.5, 0.01, 0.05, 0.001, 0.005, 0.0001, 0.0005]:
                 for lr in [1, 0.1, 0.01, 0.001] if alg == 'sgd' else [1]:
                     for training_epochs in [5, 10, 15, 30, 50]:
-                        params_list.append({"K": K, "lambda_u": lambda_u,
+                        params_grid.append({"K": K, "lambda_u": lambda_u,
                                             "lambda_v": lambda_v,
                                             "lr": lr, "training_epochs": training_epochs})
 
-    print(len(params_list))
+    print(len(params_grid))
     best_quota = 0.95
     for train_size in range(2, 100):
         param_data = {}
-        for params in params_list:
+        for params in params_grid:
             benchmark = Benchmark(metric=metric, train_size=train_size, params=params)
             benchmark.run_evaluation("", "eval", 1, alg)
             svd_score = benchmark.eval_result("eval", alg)
             # svd_score = random.uniform(0, 1)
             param_data[json.dumps(params)] = svd_score
-        top_n = max(1, int(len(params_list) * best_quota))
-        # params_list = params_list[:top_n]
-        # print(train_size, ':', len(params_list))
-        params_list = [json.loads(params) for params, score in sorted(param_data.items(),
+        top_n = max(1, int(len(params_grid) * best_quota))
+        # params_grid = params_grid[:top_n]
+        # print(train_size, ':', len(params_grid))
+        params_grid = [json.loads(params) for params, score in sorted(param_data.items(),
                                                                       key=lambda item: item[1],
                                                                       reverse=True)[:top_n]]
-        if len(params_list) == 1:
+        if len(params_grid) == 1:
             break
 
-    print(">>>", metric, alg, "best_params:", params_list)
+    print(">>>", metric, alg, "best_params:", params_grid)
     # train_size = 90
     #
     # metrics = ["cost", "cost*perf", "perf"]
@@ -503,3 +503,4 @@ if __name__ == '__main__':
     # benchmark.run_evaluation("", "eval", 1, "als")
     # svd_score = benchmark.eval_result("eval", "als")
     # print(svd_score)
+
