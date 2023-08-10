@@ -16,7 +16,7 @@ def plotter(size):
     line_styles = [":", "-", "-.", ]  # "--",
     colors = ["green", "blue", "red", "cyan", "yellow", "pink"]
     plt.figure(figsize=(7, 4))
-    plt.rcParams.update({'font.size': 12})
+    plt.rcParams.update({'font.size': 16})
     metrics = ["perf", "cost", "cost*perf"]
     imp_cost = 0
     imp_perf_cost = 0
@@ -41,21 +41,21 @@ def plotter(size):
                         if metric == "cost*perf":
                             imp_perf_cost -= sum(scores)
                     plt.plot(thres_list, scores,
-                             line_styles[epoch], label=f'{metric}', color=colors[index])
+                             line_styles[epoch], label=f'{metric}', color=colors[index], linewidth=2)
                 else:
                     plt.plot(thres_list, scores,
-                             line_styles[epoch], label=f'_nolegend_', color=colors[index])
+                             line_styles[epoch], label=f'_nolegend_', color=colors[index], linewidth=2.5)
 
                 plt.grid(True)
                 # plt.xlabel(f"{alg}")
-                plt.xticks(np.linspace(0, 1, 11), fontsize=12)
-                plt.yticks(np.linspace(0, 1, 6), fontsize=12)
+                plt.xticks(np.linspace(0, 1, 11), fontsize=16)
+                plt.yticks(np.linspace(0, 1, 6), fontsize=16)
 
-        plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
+        plt.legend(bbox_to_anchor=(.73, .01, .27, .1), loc='lower left',
                    ncol=1, mode="expand", borderaxespad=0.1)
-        plt.ylim(0 ,1.01)
-        plt.ylabel("Probality of accurate prediction", fontsize=10)
-        plt.xlabel("Threshold", fontsize=10)
+        plt.ylim(0, 1.01)
+        plt.ylabel("Probability of accurate prediction", fontsize=14)
+        plt.xlabel("Threshold", fontsize=14)
         plt.tight_layout(h_pad=1)
         plt.savefig(f"{res_dir}/fig_evolving_ds_{alg}.png")
         plt.clf()

@@ -17,7 +17,7 @@ def smooth(x,y, kernel_size):
     return x, y
 
 plt.figure(figsize=(7, 4))
-plt.rcParams.update({'font.size': 12})
+plt.rcParams.update({'font.size': 16})
 colors = ["green", "blue", "red", "cyan", "yellow", "pink"]
 n_job_list = range(2, 100)  # [12, 24, 40, 48, 78, 99]
 imp_cost = 0
@@ -40,13 +40,13 @@ for alg in ["als", "sgd"]:
         # smoothing for better curves (totally optional)
         x, y = smooth(x, y, 31)
         if alg == "als":
-            plt.plot(x, y, "-", label=f'{metric}', color=colors[index])
+            plt.plot(x, y, "-", label=f'{metric}', color=colors[index], linewidth=2)
             if metric == "cost":
                 imp_cost += sum(svd_scores)
             if metric == "cost*perf":
                 imp_cost_perf += sum(svd_scores)
         else:
-            plt.plot(x, y, "--", label=f'_nolegend_', color=colors[index])
+            plt.plot(x, y, "--", label=f'_nolegend_', color=colors[index], linewidth=2)
             if metric == "cost":
                 imp_cost -= sum(svd_scores)
             if metric == "cost*perf":
@@ -55,10 +55,10 @@ for alg in ["als", "sgd"]:
         plt.xticks(np.linspace(0, 6, 7))
         plt.yticks(np.linspace(0, 1, 6))
 
-plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
+plt.legend(bbox_to_anchor=(.73, .01, .27, .1), loc='lower left',
            ncol=1, mode="expand", borderaxespad=0.1)
-plt.ylabel("Probality of predicting 15% of optimum", fontsize=10)
-plt.xlabel("Ratio of num training jobs vs num of configs", fontsize=10)
+plt.ylabel("Probability of predicting within T=15%", fontsize=12)
+plt.xlabel("Ratio of num training jobs vs num of configs", fontsize=14)
 plt.tight_layout(h_pad=1)
 plt.savefig(f"./fig_n_jobs.png")
 plt.clf()

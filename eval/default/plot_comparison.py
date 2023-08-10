@@ -10,7 +10,7 @@ patterns = ["*", "\\", "+", "/", "O", "x"]
 n_jobs = 99
 x = np.arange(len(metrics))
 width = 0.12
-plt.rcParams.update({'font.size': 10})
+plt.rcParams.update({'font.size': 11})
 fig, ax = plt.subplots(figsize=(7, 5))
 
 data = []
@@ -28,14 +28,14 @@ for index, col in enumerate(columns):
     pos+=width
 
 
-ax.set_ylabel('probabily to predict within 15% of optimum')
+ax.set_ylabel('Probability to predict within 15% of optimum', fontsize=14)
 ax.set_xticks(x)
-ax.set_xticklabels(metrics, rotation=0, fontsize=12)
+ax.set_xticklabels(metrics, rotation=0, fontsize=16)
 ax.set_yticks(np.linspace(0,1,11))
-ax.set_yticklabels(["%.1f" % x for x in np.linspace(0,1,11)], fontsize=12)
+ax.set_yticklabels(["%.1f" % x for x in np.linspace(0,1,11)], fontsize=14)
 ax.grid(axis='y')
 ax.set_axisbelow(True)
-ax.legend(ncol=3)
+ax.legend(ncol=3, loc='upper right')
 
 
 plt.tight_layout()

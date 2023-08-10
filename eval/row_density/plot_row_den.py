@@ -20,7 +20,7 @@ def plotter(n_jobs):
     colors = ["green", "blue", "red", "cyan", "yellow", "pink"]
 
     plt.figure(figsize=(7, 4))
-    plt.rcParams.update({'font.size': 12})
+    plt.rcParams.update({'font.size': 16})
 
     metrics = ["perf", "cost", "cost*perf"]
     # density_list = np.linspace(0.2, 1, 9)
@@ -52,7 +52,7 @@ def plotter(n_jobs):
             # smoothing for better curves (totally optional)
             x, y = smooth(x, y, 51)
             if alg == "als":
-                plt.plot(x, y, "-", label=f'{metric}', color=colors[index])
+                plt.plot(x, y, "-", label=f'{metric}', color=colors[index],  linewidth=2)
                 if metric == "perf":
                     imp_perf += sum(scores)
                 if metric == "cost":
@@ -60,7 +60,7 @@ def plotter(n_jobs):
                 if metric == "cost*perf":
                     imp_perf_cost += sum(scores)
             else:
-                plt.plot(x, y, "--", label=f'_nolegend_', color=colors[index])
+                plt.plot(x, y, "--", label=f'_nolegend_', color=colors[index],  linewidth=2)
                 if metric == "perf":
                     imp_perf -= sum(scores)
                 if metric == "cost":
@@ -71,10 +71,10 @@ def plotter(n_jobs):
             plt.xticks(np.linspace(0.2, 1, 9))
             plt.yticks(np.linspace(0, 1, 6))
 
-    plt.legend(bbox_to_anchor=(.77, .01, .23, .1), loc='lower left',
+    plt.legend(bbox_to_anchor=(.73, .01, .27, .1), loc='lower left',
                ncol=1, mode="expand", borderaxespad=0.1)
-    plt.ylabel("Probality of predicting 15% of optimum", fontsize=10)
-    plt.xlabel("Fraction of configs profiled per training job", fontsize=10)
+    plt.ylabel("Probability of predicting within T=15%", fontsize=12)
+    plt.xlabel("Fraction of configs profiled per training job", fontsize=14)
     plt.tight_layout(h_pad=1)
     plt.savefig(f"./fig_row_den_{n_jobs}.png")
     plt.clf()
